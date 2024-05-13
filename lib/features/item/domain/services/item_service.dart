@@ -208,11 +208,11 @@ class ItemService implements ItemServiceInterface {
         showCustomSnackBar('out_of_stock'.tr);
       }else {
         if(quantityLimit != null ){
-          if(quantity >= quantityLimit && quantityLimit != 0) {
-            showCustomSnackBar('${'maximum_quantity_limit'.tr} $quantityLimit', getXSnackBar: getxSnackBar);
-          } else {
+          // if(quantity >= quantityLimit && quantityLimit != 0) {
+          //   showCustomSnackBar('${'maximum_quantity_limit'.tr} $quantityLimit', getXSnackBar: getxSnackBar);
+          // } else {
             quantity = quantity + 1;
-          }
+          // }
         }else {
           quantity = quantity + 1;
         }
