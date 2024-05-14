@@ -162,7 +162,17 @@ class RouteHelper {
   static const String brands = '/brands';
   static const String brandsItemScreen = '/brands-item-screen';
 
-
+  static double roundOrderAmount(double amount) {
+  int lastDigit = (amount * 10).toInt() % 10;
+  
+  if (lastDigit >= 1 && lastDigit <= 4) {
+    return (amount ~/ 10 * 10 + 5).toDouble();
+  } else if (lastDigit >= 6 && lastDigit <= 9) {
+    return (amount ~/ 10 * 10 + 10).toDouble();
+  }
+  
+  return amount; // No rounding if the last digit is 0 or 5
+}
   static String getInitialRoute({bool fromSplash = false}) => '$initial?from-splash=$fromSplash';
   static String getSplashRoute(NotificationBodyModel? body) {
     String data = 'null';
@@ -420,7 +430,7 @@ class RouteHelper {
     GetPage(name: payment, page: () {
       OrderModel order = OrderModel(
         id: int.parse(Get.parameters['id']!), orderType: Get.parameters['type'], userId: int.parse(Get.parameters['user']!),
-        orderAmount: double.parse(Get.parameters['amount']!),
+        orderAmount: roundOrderAmount(double.parse(Get.parameters['amount']!)),
       );
       bool isCodActive = Get.parameters['cod-delivery'] == 'true';
       String addFundUrl = '';
