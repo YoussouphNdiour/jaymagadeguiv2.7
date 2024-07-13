@@ -179,7 +179,7 @@ class OrderInfoWidget extends StatelessWidget {
                   Divider(height: Dimensions.paddingSizeLarge, color: Theme.of(context).disabledColor.withOpacity(0.30)),
 
                   Row(children: [
-                    Text('${'unavailable_item_note'.tr}: ', style: robotoMedium),
+                    //Text('${'unavailable_item_note'.tr}: ', style: robotoMedium),
 
                     Text(
                       order.unavailableItemNote!,

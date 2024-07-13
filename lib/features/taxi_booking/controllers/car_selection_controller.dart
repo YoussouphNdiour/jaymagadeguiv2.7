@@ -15,7 +15,7 @@ class CarSelectionController extends GetxController implements GetxService {
   bool _isCarFilterActive = false;
   RangeValues _selectedPriceRange = const RangeValues(0.2, 2.0);
   double _startingPrice = 0.0;
-  double _endingPrice = 2000.0;
+  double _endingPrice = 2000000.0;
 
   VehicleModel? _vehicleModel;
   List<BrandModel>? _brandModels;

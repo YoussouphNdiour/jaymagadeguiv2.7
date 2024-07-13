@@ -1,7 +1,7 @@
 name: sixam_mart
-description: Jaymagadegui est la plateforme de vente en ligne des produits gade gui ecommerce dr mabouba diagne dakar senegal
+description: A Multi-vendor Food. Grocery, eCommerce, Pharmacy & Parcel service.
 publish_to: 'none' #
-version: 1.0.0+32
+version: 1.0.0+33
 
 environment:
   sdk: '>=3.2.0 <4.0.0'
@@ -58,6 +58,7 @@ dependencies:
   firebase_crashlytics: ^3.4.8
   video_player: ^2.8.1
   flutter_svg: ^2.0.10+1
+  firebase_dynamic_links: ^5.5.7
 
 dev_dependencies:
   flutter_test:

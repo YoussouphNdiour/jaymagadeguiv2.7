@@ -37,7 +37,17 @@ import 'package:get/get.dart';
 import 'package:sixam_mart/features/checkout/widgets/bottom_section.dart';
 import 'package:sixam_mart/features/checkout/widgets/top_section.dart';
 import 'package:flutter/material.dart';
-
+   double roundOrderAmount(double amount) {
+  int lastDigit = (amount * 10).toInt() % 10;
+  
+  if (lastDigit >= 1 && lastDigit <= 4) {
+    return (amount ~/ 10 * 10 + 5).toDouble();
+  } else if (lastDigit >= 6 && lastDigit <= 9) {
+    return (amount ~/ 10 * 10 + 10).toDouble();
+  }
+  
+  return amount; // No rounding if the last digit is 0 or 5
+}
 class CheckoutScreen extends StatefulWidget {
   final List<CartModel?>? cartList;
   final bool fromCart;
@@ -189,24 +199,27 @@ class CheckoutScreenState extends State<CheckoutScreen> {
 
           double referralDiscount = _calculateReferralDiscount(subTotal, discount, couponDiscount);
 
-          double orderAmount = _calculateOrderAmount(
+          double orderAmount = roundOrderAmount(_calculateOrderAmount(
             price: price, variations: variations, discount: discount, addOns: addOns,
             couponDiscount: couponDiscount, cartList: _cartList, referralDiscount: referralDiscount,
-          );
+            unavailableItemNote : Get.find<CartController>().notAvailableIndex != -1 ? Get.find<CartController>().notAvailableList[Get.find<CartController>().notAvailableIndex] : '',
+            orderType: checkoutController.orderType!,
+          ));
 
-          double tax = _calculateTax(
+          double tax = roundOrderAmount(_calculateTax(
             taxIncluded: taxIncluded, orderAmount: orderAmount, taxPercent: _taxPercent,
-          );
+          ));
           double additionalCharge =  Get.find<SplashController>().configModel!.additionalChargeStatus!
               ? Get.find<SplashController>().configModel!.additionCharge! : 0;
           double originalCharge = _calculateOriginalDeliveryCharge(
             store: checkoutController.store, address: AddressHelper.getUserAddressFromSharedPref()!,
             distance: checkoutController.distance, extraCharge: checkoutController.extraCharge,
           );
-          double deliveryCharge = _calculateDeliveryCharge(
+          double deliveryCharge = roundOrderAmount(_calculateDeliveryCharge(
             store: checkoutController.store, address: AddressHelper.getUserAddressFromSharedPref()!, distance: checkoutController.distance,
             extraCharge: checkoutController.extraCharge, orderType: checkoutController.orderType!, orderAmount: orderAmount,
-          );
+            unavailableItemNote : Get.find<CartController>().notAvailableIndex != -1 ? Get.find<CartController>().notAvailableList[Get.find<CartController>().notAvailableIndex] : '',
+          ));
 
           double extraPackagingCharge = _calculateExtraPackagingCharge(checkoutController);
 
@@ -318,7 +331,7 @@ class CheckoutScreenState extends State<CheckoutScreen> {
                       padding: const EdgeInsets.symmetric(horizontal: Dimensions.paddingSizeLarge, vertical: Dimensions.paddingSizeExtraSmall),
                       child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                         Text(
-                          checkoutController.isPartialPay ? 'due_payment'.tr : 'total_amount'.tr,
+                          checkoutController.isPartialPay ? 'due_payment'.tr : 'total_amount'.tr ,
                           style: robotoMedium.copyWith(fontSize: Dimensions.fontSizeLarge, color: Theme.of(context).primaryColor),
                         ),
                         PriceConverter.convertAnimationPrice(
@@ -784,8 +797,9 @@ class CheckoutScreenState extends State<CheckoutScreen> {
     return (variationDiscount - variationPrice);
   }
 
-  double _calculateOrderAmount({required double price, required double variations, required double discount, required double addOns, required double couponDiscount, required List<CartModel?>? cartList, required double referralDiscount}) {
+  double _calculateOrderAmount({required double price, required double variations, required double discount, required double addOns, required double couponDiscount, required List<CartModel?>? cartList, required double referralDiscount, required String unavailableItemNote, required String orderType}) {
     double orderAmount = 0;
+   // if(unavailableItemNote == "Livraison Express" && orderType == 'take_away'){ orderAmount = orderAmount+2000;}
     double variationPrice = 0;
     if(cartList != null && cartList.isNotEmpty && Get.find<SplashController>().getModuleConfig(cartList[0]?.item?.moduleType).newVariation!){
       variationPrice = variations;
@@ -873,9 +887,11 @@ class CheckoutScreenState extends State<CheckoutScreen> {
     return deliveryCharge;
   }
 
-  double _calculateDeliveryCharge({required Store? store, required AddressModel address, required double? distance, required double? extraCharge, required double orderAmount, required String orderType}) {
+  double _calculateDeliveryCharge({required Store? store, required AddressModel address, required double? distance, required double? extraCharge, required double orderAmount, required String orderType, required String unavailableItemNote}) {
     double deliveryCharge = _calculateOriginalDeliveryCharge(store: store, address: address, distance: distance, extraCharge: extraCharge);
-
+if (unavailableItemNote == "Livraison Express"){
+  deliveryCharge = deliveryCharge +2000;
+}
     if (orderType == 'take_away' || (store != null && store.freeDelivery!)
         || (Get.find<SplashController>().configModel!.freeDeliveryOver != null && orderAmount
             >= Get.find<SplashController>().configModel!.freeDeliveryOver!)

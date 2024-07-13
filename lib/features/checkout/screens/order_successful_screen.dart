@@ -22,7 +22,7 @@ import 'package:get/get.dart';
 class OrderSuccessfulScreen extends StatefulWidget {
   final String? orderID;
   final String? contactPersonNumber;
-  const OrderSuccessfulScreen({super.key, required this.orderID, this.contactPersonNumber});
+  OrderSuccessfulScreen({super.key, required this.orderID, this.contactPersonNumber});
 
   @override
   State<OrderSuccessfulScreen> createState() => _OrderSuccessfulScreenState();

@@ -3,7 +3,17 @@ import 'dart:convert';
 import 'package:sixam_mart/features/address/domain/models/address_model.dart';
 import 'package:sixam_mart/features/parcel/domain/models/parcel_category_model.dart';
 import 'package:sixam_mart/features/store/domain/models/store_model.dart';
-
+   double roundOrderAmount(double amount) {
+  int lastDigit = (amount * 10).toInt() % 10;
+  
+  if (lastDigit >= 1 && lastDigit <= 4) {
+    return (amount ~/ 10 * 10 + 5).toDouble();
+  } else if (lastDigit >= 6 && lastDigit <= 9) {
+    return (amount ~/ 10 * 10 + 10).toDouble();
+  }
+  
+  return amount; // No rounding if the last digit is 0 or 5
+}
 class PaginatedOrderModel {
   int? totalSize;
   String? limit;
@@ -165,7 +175,7 @@ class OrderModel {
   OrderModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     userId = json['user_id'];
-    orderAmount = json['order_amount'].toDouble();
+    orderAmount = roundOrderAmount(json['order_amount'].toDouble());
     couponDiscountAmount = json['coupon_discount_amount'].toDouble();
     couponDiscountTitle = json['coupon_discount_title'];
     paymentStatus = json['payment_status'];

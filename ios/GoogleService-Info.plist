@@ -3,23 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>1000163153346-tmf9s0kpekc5mum4ubpga4a8gguk2592.apps.googleusercontent.com</string>
+	<string>484779040551-nv5t2qs5qtf04qimrcdmhst15pegm3ed.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.1000163153346-tmf9s0kpekc5mum4ubpga4a8gguk2592</string>
-	<key>ANDROID_CLIENT_ID</key>
-	<string>1000163153346-8h3825qftiorhelafakqhl559fubeteb.apps.googleusercontent.com</string>
+	<string>com.googleusercontent.apps.484779040551-nv5t2qs5qtf04qimrcdmhst15pegm3ed</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDjxRDIuTc6ErANoftU-FtgLBSUxMlLCeA</string>
+	<string>AIzaSyBSZIxeSErRiROSYiqEKOwAJAhPhPlZjQI</string>
 	<key>GCM_SENDER_ID</key>
-	<string>1000163153346</string>
+	<string>484779040551</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>sn.techsupplyconnect.customer</string>
+	<string>com.techsupply.jayma</string>
 	<key>PROJECT_ID</key>
-	<string>ammart-8885e</string>
+	<string>jayma-88682</string>
 	<key>STORAGE_BUCKET</key>
-	<string>ammart-8885e.appspot.com</string>
+	<string>jayma-88682.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -31,8 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:1000163153346:ios:561ab3dff8d18e0d06b25b</string>
+	<string>1:484779040551:ios:db93eeaf66e2a0c5341302</string>
 	<key>DATABASE_URL</key>
-	<string>https://ammart-8885e-default-rtdb.firebaseio.com</string>
+	<string>https://jayma-88682-default-rtdb.europe-west1.firebasedatabase.app</string>
 </dict>
 </plist>

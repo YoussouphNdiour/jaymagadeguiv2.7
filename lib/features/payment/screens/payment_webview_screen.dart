@@ -108,12 +108,12 @@ class PaymentScreenState extends State<PaymentWebViewScreen> {
                 if (!["http", "https", "file", "chrome", "data", "javascript", "about"].contains(uri.scheme)) {
                   if (await canLaunchUrl(uri)) {
                     await launchUrl(uri, mode: LaunchMode.externalNonBrowserApplication);
-                    Navigator.pushReplacementNamed(context, RouteHelper.getOrderTrackingRoute(widget.orderModel.id, widget.contactNumber));
+                    // Navigator.pushReplacementNamed(context, RouteHelper.getInitialRoute());
                      return NavigationActionPolicy.CANCEL;
                   }
                   if(["wave"].contains(uri.scheme)){
                   await launchUrl(uri ,mode: LaunchMode.externalNonBrowserApplication);
-                Navigator.pushReplacementNamed(context, RouteHelper.getOrderTrackingRoute(widget.orderModel.id, widget.contactNumber));
+                // Navigator.pushReplacementNamed(context, RouteHelper.getInitialRoute());
                 return NavigationActionPolicy.CANCEL;
                 }
                   
@@ -134,7 +134,7 @@ class PaymentScreenState extends State<PaymentWebViewScreen> {
                 });
                 if(["sameaosnapp"].contains(url!.scheme)){
                   await launchUrl(url! ,mode: LaunchMode.externalNonBrowserApplication);
-                Navigator.pushReplacementNamed(context, RouteHelper.getOrderTrackingRoute(widget.orderModel.id, widget.contactNumber));
+                // Navigator.pushReplacementNamed(context, RouteHelper.getInitialRoute());
                 }
                //Get.find<OrderController>().paymentRedirect(url: url.toString(), canRedirect: _canRedirect, onClose: (){} , addFundUrl: widget.addFundUrl, orderID: widget.orderModel.id.toString(), contactNumber: widget.contactNumber);
                 // _redirect(url.toString());

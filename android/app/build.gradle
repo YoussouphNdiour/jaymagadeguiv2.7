@@ -32,6 +32,7 @@ if (keystorePropertiesFile.exists()) {
 android {
     namespace "sn.jayma.customer"
     compileSdk 34
+    compileSdkVersion 34
     ndkVersion flutter.ndkVersion
 
     compileOptions {

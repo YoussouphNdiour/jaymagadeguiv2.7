@@ -42,7 +42,7 @@ class CartController extends GetxController implements GetxService {
   List<bool> _availableList = [];
   List<bool> get availableList => _availableList;
 
-  List<String> notAvailableList = ['Mardi', 'Jeudi', 'Samedi'];
+  List<String> notAvailableList = ['Mardi', 'Jeudi', 'Samedi', 'Livraison Express'];
   bool _addCutlery = false;
   bool get addCutlery => _addCutlery;
 
